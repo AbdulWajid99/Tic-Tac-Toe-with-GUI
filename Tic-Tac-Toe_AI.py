@@ -20,3 +20,22 @@ def printBoard(board):
     print(' ' + board[4] + ' | ' + board[5] + ' | ' + board[6]+' | ')
     print('    |    |')
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9]+' | ')
+
+
+def isWinner(b0, le):
+    pass
+
+
+def compMove():
+    pass
+
+
+def selectRandom(board):
+    pass
+
+
+def is boardFull():
+    pass
+
+
+def main():
