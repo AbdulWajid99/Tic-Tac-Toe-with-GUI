@@ -1,6 +1,7 @@
 # Base Board
 
-board = [' ' for x in range[10]]
+
+board = [" " for x in range[10]]
 
 
 def insetLetter(letter, pos):
@@ -34,43 +35,7 @@ def selectRandom(board):
     pass
 
 
-def is boardFull():
+def isBoardFull():
     pass
 
-
-def main():
-    print('Welcome to Tic Tac Toe!')
-    printBoard(board)
-
-    while not(isBoardFull(board)):
-        if not(isWinner(board, 'O')):
-            playerMove()
-            printBoard(board)
-        else:
-            print('Sorry, O\'s won this time!')
-            break
-
-        if not(isWinner(board, 'X')):
-            move = compMove()
-            if move == 0:
-                print('Tie Game!')
-            else:
-                insertLetter('O', move)
-                print('Computer placed an \'O\' in position', move, ':')
-                printBoard(board)
-        else:
-            print('X\'s won this time! Good Job!')
-            break
-
-    if isBoardFull(board):
-        print('Tie Game!')
-
-
-while True:
-    answer = input('Do you want to play again? (Y/N)')
-    if answer.lower() == 'y' or answer.lower == 'yes':
-        board = [' ' for x in range(10)]
-        print('-----------------------------------')
-        main()
-    else:
-        break
+# %%
