@@ -4,8 +4,7 @@
 import turtle
 import math
 
-# create board to play on
-
+# create board to play on GUI
 
 def drawBoard():
     # draw horizontal lines
@@ -19,7 +18,7 @@ def drawBoard():
     # Draw vertical line
 
     drawer.right(90)  # turn drawer 90 degree
-    for i in range(2):  # draw lines to times
+    for i in range(2):  # draw lines two times
         drawer.penup()  # pick pen
         # goto a specific spot x will be -300 both times but y will change both times loop repeats
         drawer.goto(100 - 200 * i, 300)
@@ -106,6 +105,12 @@ def addX(row, column):  # where to put X
         
         #now add x for computer
         board[row][column] = "x"
+    if checkWon('x'):
+        announcer.goto(-97,0)
+        announcer.write("You Won", font = ("Arial",36))
+
+    screen.update() # update after announcer
+    dectivate() #deactivate event listners
 
 # now function for each square
 def squareOne():
@@ -143,6 +148,24 @@ def squareEight():
 def squareNine():
     addX(2, 2)
 
+#function to check if someone won or not
+
+def checkWon(letter):
+
+    for i in range(3):
+        #check if 3 same in horizontal 
+        if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] == letter:
+            return True
+        #check if 3 same in vertical
+        if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] == letter:
+            return True
+        #check if 3 same in diagonal down
+        if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] == letter:
+            return True
+        #check if 3 same in diagonal up
+        if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[0][2] == letter:
+            return True
+        return False
 
 # Creating event listeners
 functions = [squareOne, squareTwo, squareThree, squareFour,
