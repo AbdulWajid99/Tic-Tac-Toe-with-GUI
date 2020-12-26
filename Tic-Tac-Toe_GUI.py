@@ -5,6 +5,7 @@ import turtle
 import math
 
 # create board to play on GUI
+board = []
 
 def drawBoard():
     # draw horizontal lines
@@ -102,15 +103,45 @@ def addX(row, column):  # where to put X
         screen.update()
     else:
         drawX(-200 + 200 * column, 200 - 200 * row)
-        
         #now add x for computer
         board[row][column] = "x"
+    
     if checkWon('x'):
         announcer.goto(-97,0)
         announcer.write("You Won", font = ("Arial",36))
 
-    screen.update() # update after announcer
-    dectivate() #deactivate event listners
+        screen.update() # update after announcer
+        dectivate() #deactivate event listners
+    else: # if not won add o
+        addO()
+        if checkWon('o'):
+            announcer.goto(-90, 0)
+            announcer.write("You Lost ", font=("Arial", 36))
+            
+            screen.update() # update after announcer
+            dectivate() #deactivate event listners
+        elif checkDraw():
+            announcer.goto(-90, 0)
+            announcer.write("Its a tie", font=("Arial", 36))
+            
+            screen.update() # update after announcer
+            dectivate() #deactivate event listners
+
+
+
+#check if thier is a tie
+
+def checkDraw():
+    #check numberof x if thier are 4 means its a draw
+    count = 0
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == "x":
+                count+= 1
+    if count > 3:
+        return True
+    else:
+        return False
 
 # now function for each square
 def squareOne():
@@ -159,13 +190,58 @@ def checkWon(letter):
         #check if 3 same in vertical
         if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] == letter:
             return True
+        
         #check if 3 same in diagonal down
-        if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] == letter:
-            return True
+    if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] == letter:
+        return True
         #check if 3 same in diagonal up
-        if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[0][2] == letter:
-            return True
-        return False
+    if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[0][2] == letter:
+        return True
+    return False
+
+# computer's turn put O
+def addO():
+
+    for i in range(3):
+        for j in range(3):
+
+            if board[i][j] == " " :
+                 #check if thier is any place left
+                board[i][j] = "o" #temporary put o thier
+                if checkWon("o"):
+                    drawO(-200 + 200 * j, 200 - 200 * i)
+                    return
+                board[i][j] = " " # if not put set it back to null
+    
+    # now block X from wining
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == " ":
+                 #check if thier is any place left
+                board[i][j] = "x" #temporary put x thier
+                if checkWon("x"): # check if x wins
+                    board[i][j]= "o" 
+                    drawO(-200 + 200 * j, 200 - 200 * i)
+                    return
+                board[i][j] = " "  # if not put set it back to null
+    
+    #Try to place o in first available corner
+    #computer only look into the corners
+    for i in range(0,3,2):
+        for j in range(0,3,2):
+            if board [i][j] == " ":
+                board = "o" 
+                drawO(-200 + 200 * j, 200 - 200 * i)
+                return
+
+    #computer if corners not availabe
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == " ":
+                board = "o"
+                drawO(-200 + 200 * j, 200 - 200 * i)
+                return
+
 
 # Creating event listeners
 functions = [squareOne, squareTwo, squareThree, squareFour,
@@ -196,7 +272,7 @@ screen.tracer(0)  # turn animation off
 # Since computer don't know what going on in game so we represnt him in this way
 # creating the board for computer 
 
-board =[]
+
 
 for i in range(3):
     row =[]
