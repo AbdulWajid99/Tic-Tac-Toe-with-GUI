@@ -1,4 +1,13 @@
-# tic-tac-toe-minimax
+<div align="center">
+	<br>
+	<a href="header.svg">
+		<img src="header.svg" width="800" height="400" alt="Click to see the source">
+	</a>
+	<br>
+</div>
+<br>
+
+# Tic-Tac-Toe-minimax
 An implementation of Minimax AI Algorithm on Tic-Tac-Toe (or Noughts and Crosses) game. Try it: [Tic-tac-toe - Minimax](https://cledersonbc.github.io/tic-tac-toe-minimax/)
 
 <p align="center">
